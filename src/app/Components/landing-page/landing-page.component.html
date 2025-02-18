@@ -1,0 +1,68 @@
+<div class="landing-page flex flex-row">
+
+    <!-- Welcome banner -->
+    <div class="landing h-[100vh] flex w-auto items-center justify-between image">
+        <div class="text-center">
+            <h2 class="text-blue-700 text-6xl font-bold uppercase mb-2">Welcome To Study Path</h2>
+            <p class="text-4xl font-bold mb-1 text-gray-700">Your Path To Academic Excellence</p>
+            <p class="text-gray-600 text-sm">
+                Keep an eye on how much time you spend learning and the topics
+                you cover.
+            </p>
+        </div>
+    </div>
+
+
+
+    <!-- Login/Sign Up -->
+    <div class="info-1 mt-40 max-w-screen-md mx-auto">
+
+        @if(showlogin){
+            <form class="signUpForm" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+                <input  formControlName="fullname"  type="text" id="name" placeholder="Enter your full name"
+                    class=" form-control w-full p-2 border border-gray-300 rounded-md mb-2">
+
+                <input type="email" formControlName="email" id="email" placeholder="Enter your email"
+                    class="w-full p-2 border border-gray-300 rounded-md mb-2">
+
+                <input type="password" formControlName="password"  id="password" placeholder="Enter your password"
+                    class="w-full p-2 border border-gray-300 rounded-md mb-2">
+
+                <input type="password" formControlName="password"  id="retype password" placeholder="Retype your password"
+                    class="w-full p-2 border border-gray-300 rounded-md mb-2">
+
+                <button
+                    class="flex p-7 px-20 py-3 mx-auto mt-3 text-gray-300 cursor-pointer hover:bg-red-600 hover:text-white border-2 border-gray-300 hover:border-red-600 shadow-sm text-justify items-center justify-end uppercase font-semibold"
+                    placeholder="Password">Sign Up</button>
+        </form>
+        <p class="text-center mt-2 text-gray-600">Already have an account? 
+            <span class="text-red-600 cursor-pointer" (click)="unhide()">Login</span></p>
+
+
+        }
+       @else{
+        <form [formGroup]="signUpForm">
+            <input type="email" id="email" ormControlName="email "  placeholder="Enter your email"
+                class="w-full p-2 border border-gray-300 rounded-md mb-2">
+
+            <input type="password" id="password" formControlName="password" id="password" placeholder="Enter your password"
+                class="w-full p-2 border border-gray-300 rounded-md mb-2">
+
+            <button
+                class="flex p-7 px-20 py-3 mx-auto mt-3 text-gray-300 cursor-pointer hover:bg-red-600 hover:text-white border-2 border-gray-300 hover:border-red-600 shadow-sm text-justify items-center justify-end uppercase font-semibold"
+                placeholder="Password">Login</button>
+
+           
+        </form>
+        <p class="text-center mt-3">
+            <span class="text-gray-400">
+                Don't Have An Account?
+                <span class="text-red-600" (click)="unhide()" >Click Here</span>
+            </span>
+        </p>
+        }
+
+    </div>
+
+
+</div>
