@@ -2,10 +2,10 @@
 
     <!-- Welcome banner -->
     <div class="landing h-[100vh] flex w-auto items-center justify-between image">
-        <div class="text-center">
-            <h2 class="text-blue-700 text-6xl font-bold uppercase mb-2">Welcome To Study Path</h2>
-            <p class="text-4xl font-bold mb-1 text-gray-700">Your Path To Academic Excellence</p>
-            <p class="text-gray-600 text-sm">
+        <div class="text-center mb-20 ">
+            <h2 class="text-amber-100 text-6xl font-extrabold uppercase drop-shadow-lg mb-2">Welcome To Study Path</h2>
+            <p class="text-4xl drop-shadow-sm font-bold mb-1 text-gray-700">Your Path To Academic Excellence</p>
+            <p class="text-gray-300 font-bold text-sm">
                 Keep an eye on how much time you spend learning and the topics
                 you cover.
             </p>
@@ -18,12 +18,12 @@
     <div class="info-1 mt-40 max-w-screen-md mx-auto">
 
         @if(showlogin){
-            <form class="signUpForm" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+            <form class="signUpForm mt-26" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
                 <input  formControlName="fullname"  type="text" id="name" placeholder="Enter your full name"
-                    class=" form-control w-full p-2 border border-gray-300 rounded-md mb-2">
+                    class="block form-control w-full p-2 border border-gray-300 rounded-md mb-2">
 
                 <input type="email" formControlName="email" id="email" placeholder="Enter your email"
-                    class="w-full p-2 border border-gray-300 rounded-md mb-2">
+                    class="block w-full p-2 border border-gray-300 rounded-md mb-2">
 
                 <input type="password" formControlName="password"  id="password" placeholder="Enter your password"
                     class="w-full p-2 border border-gray-300 rounded-md mb-2">
@@ -41,7 +41,7 @@
 
         }
        @else{
-        <form [formGroup]="signUpForm">
+        <form class="mt-26" [formGroup]="signUpForm">
             <input type="email" id="email" ormControlName="email "  placeholder="Enter your email"
                 class="w-full p-2 border border-gray-300 rounded-md mb-2">
 

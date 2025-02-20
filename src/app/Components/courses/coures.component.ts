@@ -14,6 +14,7 @@ export class CouresComponent {
   courseForm!: FormGroup;
   courses: { id: number; name: string; date: string }[] = [];
   courseId = 1;
+  editID: string = '';
 
   constructor(private fb: FormBuilder) {
       this.InitializecourseForm();
@@ -22,8 +23,10 @@ export class CouresComponent {
   seeDialog: boolean = false;
   
 
-  showForm() {
+  showForm(option: string, id:string) {
     this.seeDialog = !this.seeDialog;
+    this.editID = id;
+    console.log(this.editID);
   }
 
   closeForm() {
@@ -36,20 +39,47 @@ export class CouresComponent {
   
       addCourse(): void {
 
-        if (this.courseForm.get('courseName')?.value === '') {
-          return alert('Please enter a course name');
-        } else {
-          this.courses.push({
-            id: this.courseId++,
-            name: this.courseForm.value.courseName,
-            date: new Date().toLocaleDateString()
-          });
-    
-          this.courseForm.reset(); // Reset the form
-          this.closeForm(); // Hid
+        if(this.editID === '') {
+          const courseName = this.courseForm.get('courseName')?.value?.trim();
+      
+        if (!courseName) {
+          alert('Please enter a course name');
+          return;
         }
+      
+        this.courses.push({
+          id: this.courseId++,
+          name: courseName,
+          date: new Date().toLocaleDateString()
+        });
+
+        console.log(this.courses);
+      
+        this.courseForm.reset();
+        this.closeForm();
+        }
+        else{
+          this.showForm('edit',this.editID);
+          this.courses.filter((course) =>{
+            if(course.id === parseInt(this.editID)){
+              course.name = this.courseForm.get('courseName')?.value?.trim();
+            }
+          });
+          console.log(this.courses);
+        }
+        
       }
       myGroup = new FormGroup({
           courseName: new FormControl()
       });
+
+      // editCourse(course: any): void {
+      //   this.courseForm.setValue({ courseName: course.name });
+      //   this.editCourse = course.id; 
+      // }
+
+      deleteCourse(courseId: string): void {
+        if( confirm('Are you sure you want to delete this course?')) {
+        this.courses = this.courses.filter((course) => course.id!== parseInt(courseId));
+      }}
 }

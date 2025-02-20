@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-timetable',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   templateUrl: './timetable.component.html',
   styleUrl: './timetable.component.css'
 })
+
 export class TimetableComponent {
+  
 
 }

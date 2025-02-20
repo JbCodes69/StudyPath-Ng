@@ -13,7 +13,7 @@ export class HomepageComponent {
   
   constructor(private router: Router) { }
   logout() {
-    this.router.navigate(['/landing']); // Redirect to login page after logout
+    this.router.navigate(['/']); // Redirect to login page after logout
   }
 
 }

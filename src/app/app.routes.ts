@@ -9,7 +9,7 @@ import { SettingsComponent } from './Components/settings/settings.component';
 
 export const routes: Routes = [
     {
-        path: 'landing',
+        path: '',
         component: LandingPageComponent
     },
     { path: 'home', component: HomepageComponent,
