@@ -1,5 +1,5 @@
-<div class="container p-5 border-2 border-blue-400">
-<span class="border flex w-30  bg-gray-200 border-blue-400 text- p-1">
+<div class="container p-5 border">
+<span class="border flex w-30  bg-gray-200 shadow-lg p-1">
     
     <button (click)="showForm('create','')" class="cursor-pointer"><mat-icon>add_circle_outline</mat-icon>Add Courses</button>
 </span>
@@ -35,11 +35,11 @@
         <tbody>
             <tr class="border-t-2" *ngFor="let course of courses" #courseid id="{{course.id}}">
                 <td class="text-left border-r-2">{{ course.id }}</td>
-                <td class="text-center border-r-2">{{ course.name }}</td>
+                <td class="text-center  border-r-2">{{ course.name }}</td>
                 <td class="text-center border-r-2">{{ course.date }}</td>
                 <td class="text-center border-r-2">
                     <button (click)="showForm('edit',courseid.id)" class="border-2 mr-1 bg-green-300"><mat-icon>create</mat-icon></button>
-                    <button (click)="deleteCourse(courseid.id)" class="border-2 bg-red-400"><mat-icon>delete</mat-icon></button>
+                    <button (click)="deleteCourse(+courseid.id)" class="border-2 bg-red-400"><mat-icon>delete</mat-icon></button>
                 </td>
             </tr>
         </tbody>

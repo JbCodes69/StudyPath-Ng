@@ -1,24 +1,28 @@
 <div class="mt-10">
     <h1 class="text-2xl mb-6">Tasks For Today</h1>
-    <table class="w-full ">
-        <thead>
+    <table class="w-full border-2 ">
+        <thead class="bg-gray-200 border-2 border-blue-500">
             <tr>
-                <th class="text-left">Course Name</th>
-                <th class="text-center">Start Time</th>
-                <th class="text-center">Delay</th>
-                <th class="text-center">Countdown</th>
-                <th class="text-center">End Time</th>
+                <th class="text-left border-r-2">Course Name</th>
+                <th class="text-center border-r-2">Start Time</th>
+                <th class="text-center border-r-2">Delay</th>
+                <th class="text-center border-r-2">Countdown</th>
+                <th class="text-center border-r-2">End Time</th>
                 <th class="text-center">Status</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th class="text-left">Course Name</th>
-                <th class="text-center">Start Time</th>
-                <th class="text-center">Delay</th>
-                <th class="text-center">Countdown</th>
-                <th class="text-center">End Time</th>
-                <th class="text-center">Status</th>
+            <tr *ngFor="let task of trackerData; let i = index"  class="border-t-2">
+                <th class="text-left p-1 border-r-2">{{ task.courseName }}</th>
+                <th class="text-center p-1 border-r-2">{{ task.startTime }}</th>
+                <th class="text-center p-1 border-r-2">{{task.delay}}</th>
+                <th class="text-center p-1 border-r-2">{{task.remainingTime}}</th>
+                <th class="text-center p-1 border-r-2">{{task.endTime}}</th>
+                <th class="text-center p-1">
+                 <span class="border-2 hover:shadow-2xl">
+                    <button (click)="startCountdown(i)" class="p-1 cursor-pointer hover:bg-green-500 hover:shadow-2xs"> {{task.status}}</button>
+                 </span>
+                </th>
             </tr>
         </tbody>
     </table>

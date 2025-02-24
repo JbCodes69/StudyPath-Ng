@@ -10,6 +10,27 @@ import { CommonModule } from '@angular/common';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
+  totalCourses: number = 0;
+  constructor() { }
+  
+  ngOnInit(): void {
+   this.loadCourseCount();
+   window.addEventListener('storage', () => {
+    this.loadCourseCount();
+  });
+  }
+
+  loadCourseCount() {
+    const savedCourses = localStorage.getItem('courses');
+    if (savedCourses) {
+      this.totalCourses = JSON.parse(savedCourses).length;
+    } else {
+      this.totalCourses = 0;
+    }
+  }
+
+
+
 chartOptions = {
   title: {
     text: "Weekly Progress"

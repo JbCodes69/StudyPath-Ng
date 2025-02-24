@@ -44,13 +44,13 @@
         
         <!-- Settings and Logout -->
         <div class="mt-4 space-y-2">
-            <a routerLink class="flex items-center p-3 text-gray-700 hover:bg-gray-200 rounded-lg">
+            <a routerLink="/home/settings" routerLinkActive="active" class="flex items-center p-3 text-gray-700 hover:bg-gray-200 rounded-lg">
                 <mat-icon>settings</mat-icon>
                 <span class="ml-3">Settings</span>
             </a>
             <div class="flex items-center p-3 text-red-600 hover:bg-red-100 rounded-lg">
                 <span class="w-6 h-6 bg-red-600 text-white flex items-center justify-center rounded">L</span>
-                <button (click)=" logout()" class="ml-3">Log out</button>
+                <button (click)="logout()" class="ml-3 cursor-pointer">Log out</button>
             </div>
         </div>
     </aside>

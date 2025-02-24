@@ -1,11 +1,11 @@
-<div class="landing-page flex flex-row">
+<div class="landing-page see bg-blue-50 flex flex-row">
 
     <!-- Welcome banner -->
     <div class="landing h-[100vh] flex w-auto items-center justify-between image">
-        <div class="text-center mb-20 ">
-            <h2 class="text-amber-100 text-6xl font-extrabold uppercase drop-shadow-lg mb-2">Welcome To Study Path</h2>
-            <p class="text-4xl drop-shadow-sm font-bold mb-1 text-gray-700">Your Path To Academic Excellence</p>
-            <p class="text-gray-300 font-bold text-sm">
+        <div class="text-center mb-24">
+            <h2 class="text-yellow-300 text-6xl font-extrabold uppercase drop-shadow-lg mb-2">Welcome To Study Path</h2>
+            <p class="text-4xl drop-shadow-sm font-bold mb-1 text-gray-300">Your Path To Academic Excellence</p>
+            <p class=" font-bold text-sm">
                 Keep an eye on how much time you spend learning and the topics
                 you cover.
             </p>
@@ -15,10 +15,10 @@
 
 
     <!-- Login/Sign Up -->
-    <div class="info-1 mt-40 max-w-screen-md mx-auto">
+    <div class="info-1 grid bg-white mb-20 border border-gray-400   shadow-lg mt-40 max-w-screen-md mx-auto">
 
         @if(showlogin){
-            <form class="signUpForm mt-26" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+            <form class="signUpForm mx-2 mt-24" [formGroup]="signUpForm" (ngSubmit)="onSignUpSubmit()">
                 <input  formControlName="fullname"  type="text" id="name" placeholder="Enter your full name"
                     class="block form-control w-full p-2 border border-gray-300 rounded-md mb-2">
 
@@ -28,7 +28,7 @@
                 <input type="password" formControlName="password"  id="password" placeholder="Enter your password"
                     class="w-full p-2 border border-gray-300 rounded-md mb-2">
 
-                <input type="password" formControlName="password"  id="retype password" placeholder="Retype your password"
+                <input type="password" formControlName="retypepassword"  id="retype password" placeholder="Retype your password"
                     class="w-full p-2 border border-gray-300 rounded-md mb-2">
 
                 <button
@@ -41,8 +41,8 @@
 
         }
        @else{
-        <form class="mt-26" [formGroup]="signUpForm">
-            <input type="email" id="email" ormControlName="email "  placeholder="Enter your email"
+        <form class="mt-26 mx-2" [formGroup]="signInForm" (ngSubmit)="onSignInSubmit()">
+            <input type="email" id="email" formControlName="email "  placeholder="Enter your email"
                 class="w-full p-2 border border-gray-300 rounded-md mb-2">
 
             <input type="password" id="password" formControlName="password" id="password" placeholder="Enter your password"
@@ -57,7 +57,7 @@
         <p class="text-center mt-3">
             <span class="text-gray-400">
                 Don't Have An Account?
-                <span class="text-red-600" (click)="unhide()" >Click Here</span>
+                <span class="text-red-600 hover:cursor-pointer" (click)="unhide()" >Click Here</span>
             </span>
         </p>
         }

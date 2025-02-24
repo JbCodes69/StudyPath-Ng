@@ -1,5 +1,11 @@
 .image{
-     background-image: url('/assets/mrreal.jpg');
+     background-image: url('/images/mrreal.jpg');
+     background-size: cover;
+     background-repeat: no-repeat;
+}
+
+.see{
+     background-image: url('/images/456434344.jpeg');
      background-size: cover;
      background-repeat: no-repeat;
 }

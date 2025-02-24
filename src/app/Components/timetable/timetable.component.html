@@ -1,1 +1,65 @@
-<div class="timetable">ee</div>
+<div class="container p-5">
+    <div class="mb-3 p-3 border">
+        <button class="px-1 py-3 bg-white rounded-sm shadow-lg cursor-pointer border" (click)="openDialog()"><mat-icon>alarm_add</mat-icon>
+            <span>Add Schedule</span>
+        </button>
+    </div>
+
+    <div class="timetable w-full mt-4"></div>
+</div>
+
+<div *ngIf="isDialogOpen"
+    class="h-[100dvh] w-full z-10 items-start justify-center absolute top-0 left-0 transition-all"
+    style="background-color: rgba(0, 0, 0 , 0.6 );">
+    <div id="trans" class="card items transition-opacity duration-100 min-w-[30%] p-4 mt-5">
+        
+        <div>
+            <form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()" class="border mx-auto bg-white w-[50%] rounded-md p-4">
+                
+                <select formControlName="course" class="border-b-2 p-3 w-full mb-3 text-lg">
+                    <option value="">Select Course</option>
+                    <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
+                </select>
+
+                <select formControlName="day" class="border-b-2 p-3 w-full mb-3 text-lg">
+                    <option value="">Select Day</option>
+                    <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+                </select>
+
+                <div class="grid grid-cols-2 gap-2 mb-3">
+                    <select formControlName="startHour" class="p-3 border-b-2 mb-2 text-lg">
+                        <option value="">Start Time</option>
+                        <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+                    </select>
+                    <select formControlName="startMinute" class="p-3 border-b-2 mb-2 text-lg">
+                        <option *ngFor="let min of minutes" [value]="min">{{ min }}</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <select formControlName="endHour" class="p-3 border-b-2 mb-2 text-lg">
+                        <option value="">End Time</option>
+                        <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+                    </select>
+                    <select formControlName="endMinute" class="p-3 border-b-2 mb-2 text-lg">
+                        <option *ngFor="let min of minutes" [value]="min">{{ min }}</option>
+                    </select>
+                </div>
+
+                <!-- Actions -->
+                <div>
+                    <button type="button" (click)="closeDialog()"
+                        class="border px-2 py-1 uppercase mt-2 hover:bg-red-700 hover:text-white transition">
+                        Close Dialog
+                    </button>
+                    <button type="submit"
+                        class="border-2 px-2 py-1 uppercase mt-2 bg-green-600 text-white transition">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="timetable w-full mt-4"></div>
