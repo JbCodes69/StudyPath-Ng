@@ -54,27 +54,23 @@ export class LandingPageComponent {
     if (this.signUpForm.valid) {
       const userData = this.signUpForm.value;
       localStorage.setItem('user', JSON.stringify(userData));
-      alert('User Registered Successfully');
+      prompt('User Registered Successfully');
       this.router.navigate(['/home']);
       return;
     }
     if (this.signUpForm.invalid) {
-      alert('Please fill out the form correctly');
+      prompt('Please fill out the form correctly');
       return;
-    }
-
-    // Check for password mismatch
-    if (this.signUpForm.getError('mismatch')) { 
+    } else if(this.signUpForm.getError('mismatch')) { 
       alert('Passwords do not match');
       return;
   }
-
     
   }
 
 
    
-  onSignInSubmit(): void {
+  onSignInSubmit(){
     if (this.signInForm.valid) {
       const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
       const { email, password } = this.signInForm.value;

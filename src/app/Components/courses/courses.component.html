@@ -1,47 +1,67 @@
-<div class="container p-5 border">
-<span class="border flex w-30  bg-gray-200 shadow-lg p-1">
-    
-    <button (click)="showForm('create','')" class="cursor-pointer"><mat-icon>add_circle_outline</mat-icon>Add Courses</button>
-</span>
+<div class="container p-5">
+    <!-- Add Course Button -->
+    <div class="mb-3 p-3 border bg-white shadow-md rounded-lg flex justify-between items-center">
+        <h1 class="text-2xl font-semibold">My Courses</h1>
+        <button class="flex items-center px-3 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
+                (click)="showForm('create','')">
+            <mat-icon class="mr-2">add_circle_outline</mat-icon> Add Course
+        </button>
+    </div>
+
+    <!-- Courses Table -->
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+        <table class="w-full border-gray-200">
+            <thead class="bg-gray-100 border-b">
+                <tr class="text-left text-gray-600">
+                    <th class="p-3">#</th>
+                    <th class="p-3 text-center">Course Name</th>
+                    <th class="p-3 text-center">Date</th>
+                    <th class="p-3 text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let course of courses; let i = index" #courseid id="{{course.id}}" class="border-b hover:bg-gray-50">
+                    <td class="p-3 text-left">{{ course.id}}</td>
+                    <td class="p-3 text-center">{{ course.name }}</td>
+                    <td class="p-3 text-center">{{ course.date }}</td>
+                    <td class="p-3 text-center">
+                        <button (click)="showForm('edit', courseid.id)" 
+                                class="border p-2 rounded-md bg-green-500 text-white mr-2 hover:bg-green-600 transition">
+                            <mat-icon>create</mat-icon>
+                        </button>
+                        <button (click)="deleteCourse(+courseid.id)" 
+                                class="border p-2 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-@if(seeDialog){
-    <div  class="fixed top-0 left-0 w-full h-full flex justify-center items-center"  style="background-color: rgba(0, 0, 0 , 0.6 );">
-        <section class="bg-white p-6 border-2 h-48">
-            <h1 class="font-extrabold mb-3">Course Form</h1>
-            <form [formGroup]="courseForm" (ngSubmit)="addCourse()">
-                <input type="text" class="border-2 p-6" formControlName="courseName" placeholder="Course Name" required>
-              <div class="flex justify-between mt-auto ">
-                <button type="submit" class="border-2 bg-green-500 text-white p-2">Sumbit</button>
-                <button type="button" (click)="closeForm()" class="border-2 bg-red-400 text-white p-2 ml-2">Cancel</button>
-              </div>
-            </form>
-        </section>
-    </div>
-}
-
-
-<div class="mt-10">
-    <h1 class="text-2xl mb-6">My Courses</h1>
-    <table class="w-full border-2 ">
-        <thead class="bg-gray-200 border-2 border-blue-500">
-            <tr>
-                <th class="text-left border-r-2">#</th>
-                <th class="text-center border-r-2">Course Name</th>
-                <th class="text-center border-r-2">Date</th>
-                <th class="text-center">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="border-t-2" *ngFor="let course of courses" #courseid id="{{course.id}}">
-                <td class="text-left border-r-2">{{ course.id }}</td>
-                <td class="text-center  border-r-2">{{ course.name }}</td>
-                <td class="text-center border-r-2">{{ course.date }}</td>
-                <td class="text-center border-r-2">
-                    <button (click)="showForm('edit',courseid.id)" class="border-2 mr-1 bg-green-300"><mat-icon>create</mat-icon></button>
-                    <button (click)="deleteCourse(+courseid.id)" class="border-2 bg-red-400"><mat-icon>delete</mat-icon></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<!-- Course Form Dialog -->
+<div *ngIf="seeDialog"
+     class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+    <section class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h1 class="text-xl font-bold text-gray-700 mb-4 text-center">Course Form</h1>
+        <form [formGroup]="courseForm" (ngSubmit)="addCourse()">
+            <input type="text"
+                   class="border-2 border-gray-300 rounded-lg p-3 w-full focus:ring-2 focus:ring-blue-400"
+                   formControlName="courseName"
+                   placeholder="Course Name"
+                   required>
+            <div class="flex justify-center gap-4 mt-4">
+                <button type="submit"
+                        class="bg-green-500 text-white px-4 py-2 cursor-pointer hover:shadow-lg rounded-lg hover:bg-green-600 transition">
+                    Submit
+                </button>
+                <button type="button"
+                        (click)="closeForm()"
+                        class="bg-red-500 text-white px-4 py-2 cursor-pointer hover:shadow-lg rounded-lg hover:bg-red-600 transition">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </section>
 </div>

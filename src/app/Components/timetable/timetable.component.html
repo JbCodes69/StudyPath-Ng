@@ -18,31 +18,31 @@
                 
                 <select formControlName="course" class="border-b-2 p-3 w-full mb-3 text-lg">
                     <option value="">Select Course</option>
-                    <option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</option>
+                    <option *ngFor="let course of courses" [ngValue]="{name:course.name,id:course.id}">{{course.name}}</option>
                 </select>
 
                 <select formControlName="day" class="border-b-2 p-3 w-full mb-3 text-lg">
                     <option value="">Select Day</option>
-                    <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+                    <option *ngFor="let day of days" [value]="day">{{day}}</option>
                 </select>
 
                 <div class="grid grid-cols-2 gap-2 mb-3">
                     <select formControlName="startHour" class="p-3 border-b-2 mb-2 text-lg">
                         <option value="">Start Time</option>
-                        <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+                        <option *ngFor="let hour of hours" [value]="hour">{{hour}}</option>
                     </select>
                     <select formControlName="startMinute" class="p-3 border-b-2 mb-2 text-lg">
-                        <option *ngFor="let min of minutes" [value]="min">{{ min }}</option>
+                        <option *ngFor="let min of minutes" [value]="min">{{min}}</option>
                     </select>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2">
                     <select formControlName="endHour" class="p-3 border-b-2 mb-2 text-lg">
                         <option value="">End Time</option>
-                        <option *ngFor="let hour of hours" [value]="hour">{{ hour }}</option>
+                        <option *ngFor="let hour of hours" [value]="hour">{{hour}}</option>
                     </select>
                     <select formControlName="endMinute" class="p-3 border-b-2 mb-2 text-lg">
-                        <option *ngFor="let min of minutes" [value]="min">{{ min }}</option>
+                        <option *ngFor="let min of minutes" [value]="min">{{min}}</option>
                     </select>
                 </div>
 

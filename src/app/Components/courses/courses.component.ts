@@ -16,7 +16,7 @@ export class CoursesComponent {
   
   courseForm!: FormGroup;
   courses: { id: string, name: string, date: string }[] = [];
-  courseId = 1;
+  courseId:number = 0;
   editID: string = '';
 
   constructor(private fb: FormBuilder, private coursesService: CoursesService) {
@@ -47,7 +47,8 @@ export class CoursesComponent {
             alert('Please enter a course name');
             return;
           }
-          const newCourse = { id: this.courseId++, name: courseName, date: new Date().toLocaleDateString() };
+          this.courseId = this.courseId+=1;
+          const newCourse = { id: this.courseId, name: courseName, date: new Date().toLocaleDateString() };
           const updatedCourses = [...this.courses, newCourse];
     
           this.coursesService.saveCoursesToStorage(updatedCourses);
@@ -77,9 +78,12 @@ export class CoursesComponent {
       deleteCourse(courseId: number): void {
         if (confirm('Are you sure you want to delete this course?')) {
           this.coursesService.deleteCourseFromSchedule(courseId);
+          this.courses = this.courses.filter(c => +c.id !== courseId);
+          this.coursesService.saveCoursesToStorage(this.courses);
         }
       }
-
+      
+      
       saveCourses() {
         localStorage.setItem('courses', JSON.stringify(this.courses));
       }

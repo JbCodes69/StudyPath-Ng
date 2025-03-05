@@ -6,13 +6,15 @@ import { ScheduleService } from './schedule.service';
   providedIn: 'root'
 })
 export class CoursesService {
-  getCourses() {
-    return this.courses$; 
-  }
+  
   private courses = new BehaviorSubject<any[]>(this.getCoursesFromStorage());
   courses$ = this.courses.asObservable();
 
   constructor(private scheduleService: ScheduleService) {} 
+
+  getCourses() {
+    return this.courses$; 
+  }
 
   getCoursesFromStorage() {
     const savedCourses = localStorage.getItem('courses');
@@ -28,7 +30,7 @@ export class CoursesService {
     let schedules = JSON.parse(localStorage.getItem('schedules') || '[]');
     
     // Remove schedules where courseId matches
-    schedules = schedules.filter((schedule: { courseId: number; }) => schedule.courseId !== courseId);
+    schedules = schedules.filter((schedule: { course_id: number; }) => schedule.course_id !== courseId);
     
     // Update local storage
     localStorage.setItem('schedules', JSON.stringify(schedules));

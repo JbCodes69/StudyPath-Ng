@@ -1,28 +1,36 @@
-<div class="mt-10">
-    <h1 class="text-2xl mb-6">Tasks For Today</h1>
-    <table class="w-full border-2 ">
-        <thead class="bg-gray-200 border-2 border-blue-500">
+<div class="mt-10 shadow-lg border border-gray-300 p-4 rounded-lg bg-white">
+    <h1 class="text-2xl font-semibold mb-4">Tasks For Today</h1>
+    <table class="w-full border border-gray-300">
+        <thead class="bg-gray-200 border">
             <tr>
-                <th class="text-left border-r-2">Course Name</th>
-                <th class="text-center border-r-2">Start Time</th>
-                <th class="text-center border-r-2">Delay</th>
-                <th class="text-center border-r-2">Countdown</th>
-                <th class="text-center border-r-2">End Time</th>
-                <th class="text-center">Status</th>
+                <th class="text-left border-r p-2">Course Name</th>
+                <th class="text-center border-r p-2">Start Time</th>
+                <th class="text-center border-r p-2">Delay</th>
+                <th class="text-center border-r p-2">Countdown</th>
+                <th class="text-center border-r p-2">End Time</th>
+                <th class="text-center p-2">Status</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let task of trackerData; let i = index"  class="border-t-2">
-                <th class="text-left p-1 border-r-2">{{ task.courseName }}</th>
-                <th class="text-center p-1 border-r-2">{{ task.startTime }}</th>
-                <th class="text-center p-1 border-r-2">{{task.delay}}</th>
-                <th class="text-center p-1 border-r-2">{{task.remainingTime}}</th>
-                <th class="text-center p-1 border-r-2">{{task.endTime}}</th>
-                <th class="text-center p-1">
-                 <span class="border-2 hover:shadow-2xl">
-                    <button (click)="startCountdown(i)" class="p-1 cursor-pointer hover:bg-green-500 hover:shadow-2xs"> {{task.status}}</button>
-                 </span>
-                </th>
+            <tr *ngFor="let task of trackerData; let i = index" class="border-t hover:bg-gray-100 transition">
+                <td class="text-left p-2 border-r">{{task.courseName}}</td>
+                <td class="text-center p-2 border-r">{{ task.startTime | date:'shortTime' }}</td>
+                <td class="text-center p-2 border-r">{{task.delay}}</td>
+                <td class="text-center p-2 border-r">{{task.remainingTime}}</td>
+                <td class="text-center p-2 border-r">{{ task.endTime | date:'shortTime' }}</td>
+                <td class="text-center p-2">
+                    <button 
+                        [disabled]="!canStartTask(task)" 
+                        (click)="startCountdown(i)" 
+                        class="px-3 py-1 rounded shadow-md text-white transition duration-200 ease-in-out"
+                        [ngClass]="{
+                            'bg-yellow-500 hover:bg-yellow-600': task.status === 'Pending',
+                            'bg-green-500 hover:bg-green-600': task.status === 'Ongoing',
+                            'bg-gray-400': !canStartTask(task)
+                        }">
+                        {{task.status}}
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>

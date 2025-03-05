@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { ScheduleService } from '../../services/schedule.service';  // ✅ Injected ScheduleService
-import { CoursesService } from '../../services/courses.service';  // ✅ Injected CoursesService
+import { ScheduleService } from '../../services/schedule.service'; 
+import { CoursesService } from '../../services/courses.service';   
 
 declare class Timetable {
   constructor();
@@ -28,15 +28,15 @@ export class TimetableComponent implements OnInit {
   timetable: any;
   scheduleForm!: FormGroup;
   isDialogOpen = false;
-  courses: { id: any, name: any }[] = [];  // ✅ Now using CoursesService
+  courses: { id: any, name: any }[] = [];  
   days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   hours = Array.from({ length: 24 }, (_, i) => i); 
   minutes = [0, 15, 30, 45];
 
   constructor(
     private fb: FormBuilder, 
-    @Inject(ScheduleService) private scheduleService: ScheduleService,  // ✅ Injected
-    private coursesService: CoursesService  // ✅ Injected
+    @Inject(ScheduleService) private scheduleService: ScheduleService,
+    private coursesService: CoursesService  
   ) {  
     this.scheduleForm = this.fb.group({
       course: [''],
@@ -46,20 +46,18 @@ export class TimetableComponent implements OnInit {
       endHour: [''],
       endMinute: ['']
     });
-  }
+  }                                                                      
+  
 
   ngOnInit(): void {
     this.loadCourses();  
     this.loadSchedules();
   }
 
-  // ✅ Fetch courses from the shared CoursesService
+  //Fetch courses from the shared CoursesService
   loadCourses() {
     this.coursesService.getCourses().subscribe(courses => {
-      this.courses = courses.map(course => ({
-        id: course.id,
-        name: course.name
-      }));
+      this.courses = courses
     });
   }
 
@@ -78,7 +76,7 @@ export class TimetableComponent implements OnInit {
 
       const currentYear = new Date().getFullYear();
       const currentMonth = new Date().getMonth();
-      const currentDay = new Date().getDay();
+      const currentDay = new Date().getDate();
 
       this.timetable.addEvent(
         schedule.course,
@@ -103,19 +101,25 @@ export class TimetableComponent implements OnInit {
   onSubmit() { 
     if (this.scheduleForm.valid) {
       const scheduleData = this.scheduleForm.value;
+      const startTimeStr = `${scheduleData.startHour}:${scheduleData.startMinute}`;
+      const endTimeStr   = `${scheduleData.endHour}:${scheduleData.endMinute}`;
       const newStartTime = parseInt(scheduleData.startHour) * 60 + parseInt(scheduleData.startMinute);
       const newEndTime = parseInt(scheduleData.endHour) * 60 + parseInt(scheduleData.endMinute);
+
+      console.log(scheduleData.course)
 
       if (newStartTime >= newEndTime) {  
         alert("End time must be later than start time.");
         return;
       }
 
+
       const newSchedule = {
-        course: scheduleData.course,
+        course_id:scheduleData.course.id,
+        course: scheduleData.course.name,
         day: scheduleData.day,
-        startTime: `${scheduleData.startHour}:${scheduleData.startMinute}`,
-        endTime: `${scheduleData.endHour}:${scheduleData.endMinute}`
+        startTime: startTimeStr,
+        endTime: endTimeStr
       };
 
       this.scheduleService.saveSchedule(newSchedule);  
