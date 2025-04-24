@@ -1,4 +1,4 @@
-.image{
+/* .image{
      background-image: url('/images/mrreal.jpg');
      background-size: cover;
      background-repeat: no-repeat;
@@ -8,4 +8,47 @@
      background-image: url('/images/456434344.jpeg');
      background-size: cover;
      background-repeat: no-repeat;
-}
+} */
+
+.popup-overlay {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background: rgba(0, 0, 0, 0.5);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
+   
+   .popup-box {
+     background: white;
+     padding: 20px;
+     width: 60%;
+     max-width: 530px;
+     height: 70%;
+     max-height: 300px;
+     border-radius: 10px;
+     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+     text-align: center;
+     align-items: center;
+     display: flex;
+   }
+   
+   .popup-box p {
+     margin-bottom: 15px;
+   }
+   
+   .popup-box button {
+     background: #007bff;
+     color: white;
+     border: none;
+     padding: 10px 20px;
+     cursor: pointer;
+     border-radius: 5px;
+   }
+   
+   .popup-box button:hover {
+     background: #0056b3;
+   }

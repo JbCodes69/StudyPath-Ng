@@ -1,6 +1,7 @@
 <div class="container p-5">
-    <div class="mb-3 p-3 border">
-        <button class="px-1 py-3 bg-white rounded-sm shadow-lg cursor-pointer border" (click)="openDialog()"><mat-icon>alarm_add</mat-icon>
+    <div class="mb-3 p-3 border bg-white shadow-sm rounded-lg flex justify-between items-center">
+        <h1 class="text-2xl font-semibold">My Timetable</h1>
+        <button class="px-3 py-2 bg-blue-500 text-white rounded-sm shadow-lg cursor-pointer border" (click)="openDialog()"><mat-icon>alarm_add</mat-icon>
             <span>Add Schedule</span>
         </button>
     </div>
@@ -49,11 +50,11 @@
                 <!-- Actions -->
                 <div>
                     <button type="button" (click)="closeDialog()"
-                        class="border px-2 py-1 uppercase mt-2 hover:bg-red-700 hover:text-white transition">
+                        class="border px-2 py-1 uppercase mt-2 cursor-pointer hover:bg-red-700 hover:text-white transition">
                         Close Dialog
                     </button>
-                    <button type="submit"
-                        class="border-2 px-2 py-1 uppercase mt-2 bg-green-600 text-white transition">
+                    <button type="submit" 
+                        class="border-2 px-2 py-1 uppercase mt-2 cursor-pointer bg-green-600 text-white transition">
                         Submit
                     </button>
                 </div>

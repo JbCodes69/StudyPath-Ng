@@ -10,7 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./tracker.component.css'] 
 })
 export class TrackerComponent implements OnInit {
+  // Variables
   trackerData: any[] = [];
+  startDate!: Date;
+  endDate!: Date;
 
   ngOnInit() {
     this.loadSchedules();
@@ -21,7 +24,7 @@ export class TrackerComponent implements OnInit {
     const courses = JSON.parse(localStorage.getItem('courses') || '[]');
 
     const dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    const todayIndex = new Date().getDay();  // 0=Sunday, 1=Monday, ...
+    const todayIndex = new Date().getDay();  
     const todayName = dayNames[todayIndex];
   
     const schedulesForToday = schedules.filter((schedule: any) => {
@@ -31,21 +34,21 @@ export class TrackerComponent implements OnInit {
 
     
     this.trackerData = schedulesForToday.map((schedule: any) => {
-      const startDate = this.parseTimeAsToday(schedule.startTime);
-      const endDate   = this.parseTimeAsToday(schedule.endTime);
+     this.startDate = this.parseTimeAsToday(schedule.startTime);
+      this.endDate   = this.parseTimeAsToday(schedule.endTime);
 
       // Find matching course in courses array by schedule.course_id
       const course = courses.find((c: { id: any }) => String(c.id) === String(schedule.course_id));
 
       return {
         courseName: course ? course.name : 'COURSE NOT FOUND',
-        startTime: startDate,
-        endTime: endDate,
-        delay: this.calculateDelay(startDate),
-        countdown: this.calculateCountdown(endDate),
+        startTime: this.startDate,
+        endTime: this.endDate,
+        delay: this.calculateDelay(this.startDate),
+        countdown: this.calculateCountdown(this.endDate),
         status: 'Pending',
         countdownRunning: false,
-        remainingTime: this.getTimeDifference(endDate)
+        remainingTime: this.getTimeDifference(this.endDate)
       };
     });
 
@@ -77,7 +80,7 @@ export class TrackerComponent implements OnInit {
 
   getTimeDifference(endTime: Date): string {
     const end = endTime.getTime();
-    const now = Date.now();
+    const now = this.startDate.getTime();
     const diff = end - now;
     return diff > 0 ? this.formatTime(diff) : '00:00:00';
   }
@@ -98,7 +101,7 @@ export class TrackerComponent implements OnInit {
     const task = this.trackerData[index];
     if (task.countdownRunning) return;
   
-    // Mark as in progress
+    
     task.countdownRunning = true;
     task.status = 'InProgress';
   

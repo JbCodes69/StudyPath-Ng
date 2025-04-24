@@ -22,7 +22,7 @@
                     <button 
                         [disabled]="!canStartTask(task)" 
                         (click)="startCountdown(i)" 
-                        class="px-3 py-1 rounded shadow-md text-white transition duration-200 ease-in-out"
+                        class="px-3 py-1 rounded cursor-pointer shadow-md text-white transition duration-200 ease-in-out"
                         [ngClass]="{
                             'bg-yellow-500 hover:bg-yellow-600': task.status === 'Pending',
                             'bg-green-500 hover:bg-green-600': task.status === 'Ongoing',
